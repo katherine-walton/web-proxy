@@ -1,1 +1,1 @@
-# web-proxy
+# Web Proxy
