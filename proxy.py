@@ -22,15 +22,22 @@ def proxy(port_number):
 						print("valid GET request received")
 
 						# make connection to destination server
-						domain = first_line[1][1:]
+						split_address = first_line[1][1:].split('/', 1)
+						domain = split_address[0]
+						if len(split_address) > 1:
+							url = split_address[1]
+						else:
+							url='/'
 						remote_host = (domain, 80)
 						print("About to connect to ", domain)
 						s = socket(AF_INET, SOCK_STREAM)
-						s.connect(remote_host)
+
+						s.connect(("www.stackoverflow.com", 80))
+						# s.connect(remote_host)
 
 						# send request for page
-						# TODO don't hard code this
-						s.sendall("GET / HTTP/1.1\r\nHost: www.google.com\r\n\r\n".encode())
+						request = "GET /{} HTTP/1.1\r\nHost: {}\r\n\r\n"
+						s.sendall(request.format(url, domain).encode())
 
 						while True:
 							# process reply
