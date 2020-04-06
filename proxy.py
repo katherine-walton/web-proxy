@@ -5,7 +5,6 @@ import argparse
 def proxy(port_number):
 	```
 	```
-	# TODO implement try finall thing
 	proxy_socket = socket(AF_INET, SOCK_STREAM)
 	proxy_socket.bind(('', port_number))
 	proxy_socket.listen(1)
